@@ -35,8 +35,8 @@ export class VideoContainer extends React.Component<any, any> {
         }
         const stream  = await MyInfo.getVideoStream();
         const srcObject: MediaStream | undefined =   this.previewRef!.current!.srcObject as MediaStream | undefined;
-        if (srcObject?.getVideoTracks()[0].id !== stream.id ) {
-            this.previewRef!.current!.srcObject = new MediaStream([stream]);
+        if (srcObject?.getVideoTracks()[0].id !== stream.getVideoTracks()[0].id) {
+            this.previewRef!.current!.srcObject = stream;
         }
     }
 

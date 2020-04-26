@@ -33,8 +33,7 @@ export class VideoParticipant extends React.Component<any, any> {
     }
 
 
-
-    updateMedia() {
+    updateMedia () {
         this.videoRef.current!.srcObject = new MediaStream([this.props.participant.mediasoup.consumer.video.track]);
 
         if (this.props.participant.mediaState.microphoneEnabled) {
@@ -53,11 +52,10 @@ export class VideoParticipant extends React.Component<any, any> {
            this.updateMedia();
        }
     }
-
+           
     componentWillUnmount(): void {
         this.detectAudioChange();
     }
-
 
     render() {
         return (
