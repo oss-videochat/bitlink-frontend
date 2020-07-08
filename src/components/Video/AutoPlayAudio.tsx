@@ -12,11 +12,20 @@ don't tell the nonexistent marketing team.
 
 import React from 'react';
 
-const audioBank: HTMLAudioElement[] = Array.from({length: 100}, el => document.createElement('audio') as unknown as HTMLAudioElement);
+const isiOS = (/iPad|iPhone|iPod/.test(navigator.platform) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) &&
+    !window.MSStream;
+
+let audioBank: HTMLAudioElement[] = [];
+
+if(isiOS){
+    audioBank = Array.from({length: 100}, el => document.createElement('audio') as unknown as HTMLAudioElement);
+}
+
 let prepared = false;
 
 export function prepareAudioBank() {
-    if (prepared) {
+    if (prepared || !isiOS) {
         return;
     }
 
@@ -39,7 +48,7 @@ export class AutoPlayAudio extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
-        if (!prepared) {
+        if (!prepared && isiOS) {
             throw 'Audios are not prepared';
         }
         this.audioElement.addEventListener("canplay", () => {
@@ -57,7 +66,9 @@ export class AutoPlayAudio extends React.Component<any, any> {
     componentWillUnmount() {
         this.audioElement.pause();
         this.audioElement.srcObject = null;
-        audioBank.push(this.audioElement);
+        if(isiOS){
+            audioBank.push(this.audioElement);
+        }
     }
 
     render() {
