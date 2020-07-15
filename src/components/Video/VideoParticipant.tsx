@@ -23,7 +23,7 @@ export class VideoParticipant extends React.Component<any, any> {
 
     componentDidMount() {
         this.detectAudioChange = reaction(() => {
-            return this.props.participant.mediaState.microphoneEnabled
+            return this.props.participant.hasAudio
         }, () => {
             this.updateMedia();
         });

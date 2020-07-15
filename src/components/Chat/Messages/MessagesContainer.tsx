@@ -68,7 +68,7 @@ export class MessagesContainer extends React.Component<any, any> {
                         <FontAwesomeIcon icon={faChevronLeft}/>
                     </span>
                     <span
-                        className={"message-container--participant-name"}>{ParticipantsStore.getById(this.props.selectedUser)?.name}</span>
+                        data-private={"lipsum"} className={"message-container--participant-name"}>{ParticipantsStore.getById(this.props.selectedUser)?.name}</span>
                 </div>
                 <div className={"message-list-wrapper"}>
                     <div ref={this.list} className={"message-list"}>

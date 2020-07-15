@@ -39,7 +39,6 @@ export class ChatParticipantList extends React.Component<any, any> {
 
     onChosen(selected: string) {
         this.props.onUserSelect(selected);
-        console.log("here");
         if (window.matchMedia('(max-width: 600px)').matches) {
             UIStore.store.participantPanel = false;
         }
